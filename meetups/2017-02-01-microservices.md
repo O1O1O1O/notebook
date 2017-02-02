@@ -8,13 +8,17 @@ Formerly Netflix, then Battery Ventures, now @ AWS working on "cloud architectur
 - Slide decks from previous presentations on [github.com/adrianco](https://github.com/adrianco)
 - Setting up open source program
 
-In the last 10 years
-CPU performance - increased a little
-storage - now SSD
-network - 1Gb/s then, core network at AWS is 25Gb/s
-protocols - Soap/XML to AVRO, gRPC, Thrift, JSON: 10 to 100x faster
-architecture - monolith to microservices to functions (lambda)
-utilization - 5-10% monolith with handcrafted snowflake to docker provisioning on demand
+In the last 10 years we've seen a lot of change
+
+metric|then|now|change
+---|---|---|---
+CPU performance | | | increased modestly
+storage | spining rust | SSD | much faster
+network | 1Gb/s | core network at AWS is 25Gb/s | 25x
+protocols | Soap/XML | AVRO, gRPC, Thrift, JSON | 10 to 100x faster
+architecture | monolith | microservices and functions (lambda) |
+utilization | 5-10% monolith with handcrafted snowflake | highly utilized containers provisionined on demand
+deployment | handcrafted snowflakes | container based | 
 
 Netflix used to release every two weeks at 2am on the Thursday and bounce the db.  It worked - sometimes.
 
@@ -26,8 +30,8 @@ Netflix used to release every two weeks at 2am on the Thursday and bounce the db
 	- make all requests idempotent, 
 	- Uber - double deliver: removes the long tail in performance
 	- all data stores as append only logs
-- Pat Helland: memories guesses and apologies: https://blogs.msdn.microsoft.com/pathelland/2007/05/15/memories-guesses-and-apologies/ and https://channel9.msdn.com/Shows/ARCast.TV/ARCastTV-Pat-Helland-on-Memories-Guesses-and-Apologies, 
-- error handling code is where a lot of bugs are
+- Pat Helland: [memories guesses and apologies](https://blogs.msdn.microsoft.com/pathelland/2007/05/15/memories-guesses-and-apologies/) ([video](https://channel9.msdn.com/Shows/ARCast.TV/ARCastTV-Pat-Helland-on-Memories-Guesses-and-Apologies)),
+- error handling code is where a lot of bugs are but you only find out about them when stuff goes wrong
 - HPTS - high performance transaction systems
 
 ### Why AWS?
@@ -60,7 +64,7 @@ Netflix used to release every two weeks at 2am on the Thursday and bounce the db
 - 1st wave was to add triggers to existing AWS features like S3
 - 2nd wave was for infrastructure instances
 - 3rd wave is lambda at the edge - triggered by CDN hits and misses, 
-- AWS snowball edge: https://aws.amazon.com/snowball-edge/ instance that can be shipped as a 50lb box
+- [AWS snowball edge](https://aws.amazon.com/snowball-edge/) instance that can be shipped as a 50lb box
 
 ### What about immutable infrastructure?
 - Heroku and cloud foundry are like straightjackets that provide constraints, good if you want to build lots of copies of the same thing
@@ -79,7 +83,7 @@ Netflix used to release every two weeks at 2am on the Thursday and bounce the db
 
 ### How does the world of DevOps and SRE look with lambda especially since most companies don't have an amazing team like NetFlix?
 - companies that get out of the way of the talent and let them performcan all have engineers like Netflix - it's not that Netflix has special engineers
-- Google SRE book is a good read: https://landing.google.com/sre/book.html
+- Google SRE book is a good read. [online for free](https://landing.google.com/sre/book.html)
 - Netflix model for SRE - has an SRE team, develop tooling that measure availability - successful starts not uptime minutes, and tooling to measure what is going wrong and tooling to route errors to devs.  If devs are on call they write much better code :-) 
 - Google model is an ownership model - when things get mature something is run by operations for you.  
 - Google model can lead to apps that stop evolving (like Blogger). Netflix model is more agile friendly as devs never lose ownership.
